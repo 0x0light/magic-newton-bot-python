@@ -7,13 +7,13 @@ from playwright.async_api import async_playwright
 from colorama import Fore, Style, init
 display_header()
 
-init(autoreset=True)  # Khởi tạo colorama
+init(autoreset=True)  
 
 MAGICNEWTON_URL = "https://www.magicnewton.com/portal/rewards"
 DEFAULT_SLEEP_TIME = 24 * 60 * 60  # 24 giờ
 
 def random_extra_delay():
-    return random.randint(5, 10) * 60  # Delay ngẫu nhiên từ 5-10 phút
+    return random.randint(5, 10) * 60
 
 def get_current_time():
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
