@@ -1,3 +1,5 @@
+**CLICK THE STAR IF YOU LIKE THIS BOT <3**
+
 1. Install Python.
 
 2. Run the following command:
