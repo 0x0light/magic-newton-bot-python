@@ -10,7 +10,7 @@ display_header()
 init(autoreset=True)  
 
 MAGICNEWTON_URL = "https://www.magicnewton.com/portal/rewards"
-DEFAULT_SLEEP_TIME = 24 * 60 * 60  # 24 giờ
+DEFAULT_SLEEP_TIME = 24 * 60 * 60  
 
 def random_extra_delay():
     return random.randint(5, 10) * 60
