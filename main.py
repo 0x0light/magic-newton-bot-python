@@ -61,7 +61,7 @@ async def run_account(cookie, proxy, account_index):
             """)
             if roll_now_clicked:
                 print(Fore.YELLOW + f"[Account {account_index}] {get_current_time()} - Starting daily roll...")
-                await delay(5)
+                await delay(10)
 
             lets_roll_clicked = await page.evaluate("""
                 () => {
@@ -72,7 +72,7 @@ async def run_account(cookie, proxy, account_index):
             """)
             if lets_roll_clicked:
                 print(Fore.BLUE + f"[Account {account_index}] {get_current_time()} - Rolling the dice...")
-                await delay(5)
+                await delay(10)
 
                 throw_dice_clicked = await page.evaluate("""
                     () => {
@@ -83,32 +83,9 @@ async def run_account(cookie, proxy, account_index):
                 """)
                 if throw_dice_clicked:
                     print(Fore.MAGENTA + f"[Account {account_index}] {get_current_time()} - Waiting for dice animation...")
-                    await delay(5)
-
-                    for i in range(1, 6):
-                        press_clicked = await page.evaluate("""
-                            () => {
-                                let btn = Array.from(document.querySelectorAll('p.gGRRlH.WrOCw.AEdnq.gTXAMX.gsjAMe'))
-                                    .find(b => b.innerText.includes('Press'));
-                                if (btn) { btn.click(); return true; }
-                                return false;
-                            }
-                        """)
-                        if press_clicked:
-                            print(Fore.YELLOW + f"[Account {account_index}] {get_current_time()} - Press button clicked ({i}/5)")
-                            await delay(7)
-                        else:
-                            print(Fore.RED + f"[Account {account_index}] {get_current_time()} - 'Press' button not found.")
-                            break
-                        await delay(5)
-
-                    print(Fore.MAGENTA + f"[Account {account_index}] {get_current_time()} - Waiting before click Bank...")
-                    await delay(5)
+                    await delay(10)
 
                     try:
-                        await page.click("button:nth-child(3) > div > p")
-                        print(Fore.GREEN + f"[Account {account_index}] {get_current_time()} - Bank button clicked...")
-                        await delay(5)
 
                         dice_roll_result = await page.eval_on_selector(
                             "h2.gRUWXt.dnQMzm.ljNVlj.kzjCbV.dqpYKm.RVUSp.fzpbtJ.bYPzoC", "el => el.innerText")
@@ -128,9 +105,9 @@ async def run_account(cookie, proxy, account_index):
         print(Fore.RED + f"[Account {account_index}] {get_current_time()} - An error occurred: {e}")
 
 async def main():
-    with open("E:\\Code\\magic-newton-bot\\data.txt", "r") as f:
+    with open("data.txt", "r") as f:
         cookies = [{"name": "__Secure-next-auth.session-token", "value": line.strip(), "domain": ".magicnewton.com", "path": "/", "secure": True, "httpOnly": True} for line in f if line.strip()]
-    with open("E:\\Code\\magic-newton-bot\\proxy.txt", "r") as f:
+    with open("proxy.txt", "r") as f:
         proxies = [line.strip() for line in f if line.strip()]
     proxies += [None] * (len(cookies) - len(proxies))
 
